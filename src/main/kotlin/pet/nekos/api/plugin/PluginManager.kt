@@ -121,9 +121,6 @@ class PluginManager() {
             val executor = object : EventExecutor {
                 override fun execute(listener: Listener, event: Event) {
                     try {
-                        if (!eventClass::class.java.isAssignableFrom(Event::class.java)) {
-                            return
-                        }
                         method.invoke(listener, event)
                     } catch (ex: Exception) {
                         ex.printStackTrace()
@@ -161,6 +158,7 @@ class PluginManager() {
         var handlers = event.getHandlers()
 
         for (rl: RegisteredListener in handlers.getListeners()) {
+
             if (!rl.plugin.isEnabled) { 
                 continue
             }
@@ -169,6 +167,7 @@ class PluginManager() {
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
+
         }
     }
 }
