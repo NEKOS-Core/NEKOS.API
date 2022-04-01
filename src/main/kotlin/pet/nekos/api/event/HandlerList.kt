@@ -4,9 +4,8 @@ import pet.nekos.api.plugin.RegisteredListener
 import pet.nekos.api.plugin.Plugin
 
 class HandlerList() {
-    @Volatile var handlers = arrayOf<RegisteredListener>()
+    var handlers: Array<RegisteredListener>? = null
     var handlersMap = HashMap<EventPriority, ArrayList<RegisteredListener>>()
-    var handlersList = ArrayList<HandlerList>()
 
     init {
         for (priority: EventPriority in EventPriority.values()) {
@@ -14,35 +13,17 @@ class HandlerList() {
         }
     }
 
-    fun createAllArrays() {
-        for (h: HandlerList in handlersList) {
-            h.createArray()
-        }
-    }
-
-    fun unregisterAll(plugin: Plugin) {
-        for (list: HandlerList in handlersList) {
-            list.unregister(plugin)
-        }
-    }
-
-    fun unregisterAll(listener: Listener) {
-        for (list: HandlerList in handlersList) {
-            list.unregister(listener)
-        }
-    }
-
     fun register(listener: RegisteredListener) {
         // Kotlin doesn't allow me to check this in an if statement because of null safety
-        val b = handlersMap?.get(listener.priority)?.contains(listener)
+        val b = handlersMap.get(listener.priority)?.contains(listener)
         if (b != null && b) {
             throw IllegalStateException("Listener is already registered to priority " + listener.priority.toString())
         }
-        handlers = arrayOf<RegisteredListener>()
+        handlers = null
         handlersMap.get(listener.priority)?.add(listener)
     }
 
-    fun registerAll(listeners: MutableSet<RegisteredListener>) {
+    fun registerAll(listeners: Set<RegisteredListener>) {
         for (listener: RegisteredListener in listeners) {
             register(listener)
         }
@@ -51,7 +32,7 @@ class HandlerList() {
     fun unregister(listener: RegisteredListener) {
         val b = handlersMap.get(listener.priority)?.remove(listener)
         if (b != null && b) {
-            handlers = arrayOf<RegisteredListener>()
+            handlers = null
         }
     }
 
@@ -68,7 +49,7 @@ class HandlerList() {
                 }
             }
         }
-        if (changed) handlers = arrayOf<RegisteredListener>()
+        if (changed) handlers = null
     }
 
     fun unregister(listener: Listener) {
@@ -84,11 +65,11 @@ class HandlerList() {
                 }
             }
         }
-        if (changed) handlers = arrayOf<RegisteredListener>()
+        if (changed) handlers = null
     }
 
     fun createArray() {
-        if (handlers.isEmpty()) return
+        if (handlers != null) return
         var entries = arrayListOf<RegisteredListener>()
         for ((key, value) in handlersMap) {
             entries.addAll(value)
@@ -97,12 +78,11 @@ class HandlerList() {
     }
 
     fun getListeners(): Array<RegisteredListener> {
-        var handlers = arrayOf<RegisteredListener>()
-        while ((handlers.isEmpty())) {
-            handlers = this.handlers
+        while (handlers == null) {
             createArray()
         }
-        return handlers
+
+        return handlers as Array<RegisteredListener>
     }
 
 }
