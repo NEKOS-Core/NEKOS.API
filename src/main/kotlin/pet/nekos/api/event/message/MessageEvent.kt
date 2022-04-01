@@ -4,5 +4,14 @@ import pet.nekos.api.event.Event
 import pet.nekos.api.event.HandlerList
 
 class MessageEvent(val content: String) : Event() {
-    override var handlers = HandlerList()
+    companion object {
+        @JvmStatic
+        val handlerlist = HandlerList()
+    }
+
+    override fun getHandlers(): HandlerList {
+        return handlerlist
+    }
+
+    override var name: String? = "Message event"
 }

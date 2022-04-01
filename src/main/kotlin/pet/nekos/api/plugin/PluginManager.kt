@@ -16,7 +16,8 @@ import java.net.URLClassLoader
 import java.util.jar.Attributes
 import java.util.jar.JarInputStream
 import java.util.jar.Manifest
-import java.lang.reflect.Method;
+import java.lang.reflect.Method
+import java.lang.reflect.Field
 
 class PluginManager() {
     var plugins: ArrayList<Plugin> = arrayListOf<Plugin>()
@@ -96,7 +97,6 @@ class PluginManager() {
         try {
             methods = listener.javaClass.declaredMethods
         } catch (ex: NoClassDefFoundError) {
-            println("No class found")
             return listeners
         }
         for (method: Method in methods) {
@@ -131,8 +131,8 @@ class PluginManager() {
                 }
             }
             eventSet.add(RegisteredListener(listener, executor, handler.priority, plugin))
+            
         }
-
         return listeners
 
     }
@@ -150,18 +150,15 @@ class PluginManager() {
         getEventListeners(event).register(RegisteredListener(listener, executor, priority, plugin))
     }
 
-    fun getEventListeners(event: Class<out Event>): HandlerList {
-        try {
-            val method: Method = event.javaClass.getDeclaredMethod("get-handlers")
-            return method.invoke(null) as HandlerList
-        } catch (ex: Exception) {
-            throw Exception(ex.toString())
-        }
+    fun getEventListeners(event: Class<out Event>): HandlerList {        
+        var m: Method = event.getDeclaredMethod("getHandlerlist")
+        m.setAccessible(true)
+        var handlers: HandlerList = m.invoke(null) as HandlerList
+        return handlers
     }
 
     fun fireEvent(event: Event) {
-        val method: Method = event.javaClass.getDeclaredMethod("get-handlers")
-        var handlers = method.invoke(null) as HandlerList
+        var handlers = event.getHandlers()
 
         for (rl: RegisteredListener in handlers.getListeners()) {
             if (!rl.plugin.isEnabled) { 
