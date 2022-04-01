@@ -72,7 +72,7 @@ class HandlerList() {
         if (handlers != null) return
         var entries = arrayListOf<RegisteredListener>()
         for ((key, value) in handlersMap) {
-            entries.addAll(value)
+            entries.addAll(0, value)
         }
         handlers = entries.toArray(arrayOf<RegisteredListener>())
     }
