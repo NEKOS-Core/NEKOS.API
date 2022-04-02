@@ -1,6 +1,7 @@
 package pet.nekos.api.server
 
 import pet.nekos.api.plugin.Plugin
+import pet.nekos.api.service.Service
 import java.io.File
 
 class Server {
@@ -13,4 +14,13 @@ class Server {
             plugin.onEnable()
         }
     }
+
+    fun loadServices() {
+        serverManager.loadServices()
+        for (service: Service in serverManager.services) {
+            service.init(this)
+            service.initService()
+        }
+    }
+
 }
