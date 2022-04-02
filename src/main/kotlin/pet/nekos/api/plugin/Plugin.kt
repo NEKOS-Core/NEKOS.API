@@ -1,6 +1,7 @@
 package pet.nekos.api.plugin
 
 import pet.nekos.api.Server
+import pet.nekos.api.event.Listener
 
 import java.io.File
 
@@ -15,6 +16,9 @@ abstract class Plugin {
     }
 
     open fun onEnable() {
+        if (this is Listener) {
+            this.server?.pluginManager?.registerEvents(this, this)
+        }
         isEnabled = true
     }
 
