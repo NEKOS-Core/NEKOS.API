@@ -1,21 +1,39 @@
 package pet.nekos.api.service
 
+import pet.nekos.api.server.Server
+
 import java.io.File
-import java.io.FileInputStream
-import java.net.URL
-import java.net.URLClassLoader
-import java.util.jar.Attributes
-import java.util.jar.JarInputStream
-import java.util.jar.Manifest
 
-interface Service {
-    val serviceName: String
+abstract class Service {
 
-    fun initService(): Boolean {
+    companion object {
+        var server: Server? = null
+    }
+
+    fun getServer(): Server {
+        return server as Server
+    }
+
+    open var name: String? = null
+    open var dataDirectory: File? = null
+
+    fun init(nekosServer: Server) {
+        server = nekosServer
+    }
+
+    open fun initService(): Boolean {
         return true
     }
 
-    fun sendMessage(): Boolean {
+    open fun sendMessage(content: String): Boolean {
         return false
     }
+
+    public fun getServiceName(): String {
+        if (name == null) {
+            name = javaClass.kotlin.simpleName as String
+        }
+        return name as String
+    }
+
 }
