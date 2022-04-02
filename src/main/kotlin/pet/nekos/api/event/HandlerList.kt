@@ -71,6 +71,7 @@ class HandlerList() {
     fun createArray() {
         if (handlers != null) return
         var entries = arrayListOf<RegisteredListener>()
+        @Suppress("UNUSED_VARIABLE")
         for ((key, value) in handlersMap) {
             entries.addAll(0, value)
         }
