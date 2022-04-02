@@ -4,9 +4,10 @@ package pet.nekos.api.event
  * Represents an event
  */
 abstract class Event {
-    abstract var name: String?
 
     abstract fun getHandlers(): HandlerList
+
+    open var name: String? = null
 
     public fun getEventName(): String {
         if (name == null) {
@@ -14,6 +15,5 @@ abstract class Event {
         }
         return name as String
     }
-
 
 }

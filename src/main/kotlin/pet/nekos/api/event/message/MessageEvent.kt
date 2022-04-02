@@ -13,5 +13,4 @@ class MessageEvent(val content: String) : Event() {
         return handlerlist
     }
 
-    override var name: String? = "Message event"
 }
