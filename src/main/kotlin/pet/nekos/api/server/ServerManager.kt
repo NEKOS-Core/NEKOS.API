@@ -1,6 +1,6 @@
-package pet.nekos.api.plugin
+package pet.nekos.api.server
 
-import pet.nekos.api.Server
+import pet.nekos.api.server.Server
 import pet.nekos.api.service.Service
 import pet.nekos.api.event.Event
 import pet.nekos.api.event.Listener
@@ -8,6 +8,9 @@ import pet.nekos.api.event.EventHandler
 import pet.nekos.api.event.EventPriority
 import pet.nekos.api.event.HandlerList
 import pet.nekos.api.event.message.MessageEvent
+import pet.nekos.api.plugin.EventExecutor
+import pet.nekos.api.plugin.Plugin
+import pet.nekos.api.plugin.RegisteredListener
 
 import java.io.File
 import java.io.FileInputStream
@@ -19,7 +22,7 @@ import java.util.jar.Manifest
 import java.lang.reflect.Method
 import java.lang.reflect.Field
 
-class PluginManager() {
+class ServerManager() {
     var plugins: ArrayList<Plugin> = arrayListOf<Plugin>()
     var services: ArrayList<Service> = arrayListOf<Service>()
     val pluginDir = File("./plugins/")
