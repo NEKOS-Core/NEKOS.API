@@ -6,23 +6,39 @@ import pet.nekos.api.event.Listener
 import java.io.File
 
 abstract class Plugin {
-    var server: Server? = null
-    var name: String? = null
-    var dataDirectory: File? = null
+
+    companion object {
+        var server: Server? = null
+    }
+
+    fun getServer(): Server {
+        return server as Server
+    }
+
+    open var name: String? = null
+    open var dataDirectory: File? = null
     var isEnabled: Boolean = false
 
-    fun init(server: Server) {
-        this.server = server
+    fun init(nekosServer: Server) {
+        server = nekosServer
     }
 
     open fun onEnable() {
         if (this is Listener) {
-            this.server?.serverManager?.registerEvents(this, this)
+            server?.serverManager?.registerEvents(this, this)
         }
         isEnabled = true
     }
 
-    open fun onDisable() { 
+    open fun onDisable() {
         isEnabled = false
     }
+
+    public fun getPluginName(): String {
+        if (name == null) {
+            name = javaClass.kotlin.simpleName as String
+        }
+        return name as String
+    }
+
 }
