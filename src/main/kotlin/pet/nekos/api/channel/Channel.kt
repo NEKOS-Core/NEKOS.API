@@ -2,8 +2,10 @@ package pet.nekos.api.channel
 
 import pet.nekos.api.user.User
 
-abstract class Channel (
+open class Channel (
     var name: String,
 ) {
-    abstract fun getUsers(): Array<User>    
+    open fun getUsers(): Array<User> {
+        return arrayOf<User>()
+    }
 }
