@@ -25,10 +25,6 @@ abstract class Service {
         return true
     }
 
-    open fun sendMessage(content: String): Boolean {
-        return false
-    }
-
     public fun getServiceName(): String {
         if (name == null) {
             name = javaClass.kotlin.simpleName as String
