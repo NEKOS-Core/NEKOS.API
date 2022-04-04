@@ -3,9 +3,9 @@ package pet.nekos.api.event.message
 import pet.nekos.api.event.Event
 import pet.nekos.api.event.HandlerList
 
-import pet.nekos.api.message.Message
+import pet.nekos.api.message.ChatMessage
 
-class MessageEvent(val msg: Message) : Event() {
+class ChatMessageEvent(val msg: ChatMessage) : Event() {
     companion object {
         @JvmStatic
         val handlerlist = HandlerList()
