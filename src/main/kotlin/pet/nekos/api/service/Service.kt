@@ -1,21 +1,27 @@
 package pet.nekos.api.service
 
 import pet.nekos.api.server.Server
+import pet.nekos.api.user.User
 
 import java.io.File
 
 abstract class Service {
 
+    abstract var name: String
+    open var dataDirectory: File? = null
+
     companion object {
         var server: Server? = null
+        var selfUser: User? = null
     }
 
     fun getServer(): Server {
         return server as Server
     }
 
-    open var name: String? = null
-    open var dataDirectory: File? = null
+    fun getSelfUser(): User? {
+        return selfUser
+    }
 
     fun init(nekosServer: Server) {
         server = nekosServer
@@ -23,13 +29,6 @@ abstract class Service {
 
     open fun initService(): Boolean {
         return true
-    }
-
-    public fun getServiceName(): String {
-        if (name == null) {
-            name = javaClass.kotlin.simpleName as String
-        }
-        return name as String
     }
 
 }
