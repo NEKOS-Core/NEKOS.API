@@ -1,7 +1,7 @@
 package pet.nekos.api.event
 
 /**
- * Represents an event
+ * Represents any event
  */
 abstract class Event {
 
