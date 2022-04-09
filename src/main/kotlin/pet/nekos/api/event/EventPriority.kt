@@ -1,5 +1,8 @@
 package pet.nekos.api.event
 
+/**
+ * Enum of possible priorities
+ */
 enum class EventPriority(val num: Int) {
     /**
      * The plugin implementing this event is not of high importance,
