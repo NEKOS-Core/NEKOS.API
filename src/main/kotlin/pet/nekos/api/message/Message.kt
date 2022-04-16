@@ -25,7 +25,7 @@ open class Message (
      */
     open fun isOwn(): Boolean {
         if (service.getSelfUser() == null) {
-            return true
+            return false
         } else if (service.getSelfUser()?.hash == user.hash) {
             return true
         }
