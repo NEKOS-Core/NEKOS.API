@@ -29,7 +29,7 @@ abstract class Service {
      * Gets the user this service is running from
      * @return User that this service is running as
      */
-    fun getSelfUser(): User? {
+    open fun getSelfUser(): User? {
         return selfUser
     }
 
