@@ -12,5 +12,5 @@ open class User (
     var name: String,
     var nickname: String = name,
     var hash: String,
-    service: Service
+    var service: Service
 ) { }
