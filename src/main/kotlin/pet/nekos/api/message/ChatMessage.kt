@@ -10,7 +10,7 @@ import pet.nekos.api.service.ChatService
  * @property content Content of the message
  * @property user User that sent this message
  * @property channel Channel this message was sent in (can be null)
- * @property service Service that this message originates from
+ * @property service Service this entity belongs to
  */
 open class ChatMessage(
     content: String,
