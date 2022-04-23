@@ -5,6 +5,8 @@ import pet.nekos.api.channel.Channel
 import pet.nekos.api.service.Service
 import pet.nekos.api.service.ChatService
 
+import java.io.File
+
 /**
  * Represents a chat message. Chat messages can be replied to
  * @property content Content of the message
@@ -23,9 +25,10 @@ open class ChatMessage(
      * Reply to this message
      * 
      * @param content Content of the message to send
+     * @param attachments Optional list of attachments
      * @return If successful
      */
-    open fun reply(content: String): Boolean {
+    open fun reply(content: String, vararg attachments: File ): Boolean {
         return false
     }
 

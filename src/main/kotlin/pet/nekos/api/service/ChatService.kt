@@ -15,7 +15,7 @@ abstract class ChatService : Service() {
      * @param content Content of the message
      * @return If successful
      */
-    open fun sendMessage(content: String): Boolean {
+    open fun sendMessage(content: String, vararg attachments: File): Boolean {
         return false
     }
 
@@ -26,7 +26,7 @@ abstract class ChatService : Service() {
      * @param channel Channel to send the message in
      * @retrun If successful
      */
-    open fun sendMessage(content: String, channel: Channel): Boolean {
+    open fun sendMessage(content: String, channel: Channel, vararg attachments: File): Boolean {
         return false
     }
 
