@@ -1,6 +1,7 @@
 package pet.nekos.api.user
 
 import pet.nekos.api.service.Service
+import pet.nekos.api.guild.Guild
 
 /** Class that represents a user
  * @property name Name of this user
@@ -12,5 +13,6 @@ open class User (
     var name: String,
     var nickname: String = name,
     var hash: String,
+    var guild: Guild?,
     var service: Service
 ) { }
