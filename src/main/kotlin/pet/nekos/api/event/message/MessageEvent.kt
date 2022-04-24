@@ -12,8 +12,9 @@ import java.util.Date
  * Event for any message being received
  * @property msg Message received
  */
-class MessageEvent(val msg: Message, val time: Date) : Event() {
-    companion object {
+// class MessageEvent(val msg: Message, val time: Date) : Event() {
+class MessageEvent() : Event() {
+        companion object {
         @JvmStatic
         val handlerlist = HandlerList()
     }

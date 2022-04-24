@@ -12,7 +12,8 @@ import java.util.Date
  * Event for a chat message being received. These can be replied to
  * @property msg ChatMessage received
  */
-class ChatMessageEvent(val msg: ChatMessage, val time: Date) : Event() {
+// class ChatMessageEvent(val msg: ChatMessage, val time: Date) : Event() {
+class ChatMessageEvent() : Event() {
     companion object {
         @JvmStatic
         val handlerlist = HandlerList()
