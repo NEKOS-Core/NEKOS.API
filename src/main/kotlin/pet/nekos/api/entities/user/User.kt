@@ -4,6 +4,8 @@ import pet.nekos.api.service.Service
 import pet.nekos.api.entities.guild.Guild
 import pet.nekos.api.entities.Entity
 
+import java.io.File
+
 /** Class that represents a user
  * @property name Name of this user
  * @property nickname The friendly name of this user, defaults to the same as name
@@ -16,4 +18,23 @@ open class User (
     var hash: String,
     var guild: Guild?,
     var service: Service
-) : Entity { }
+) : Entity { 
+
+    /**
+     * Check if this is the user the bot is running as
+     * 
+     * @return If the user is the bot itself
+     */
+    open fun isSelf(): Boolean {
+        if (service.getSelfUser() == null) {
+            return false
+        } else if (service.getSelfUser()?.hash == hash) {
+            return true
+        }
+        return false
+    }
+
+    open fun sendMessage(content: String, vararg attachments: File ): Boolean {
+        return false
+    }
+}
