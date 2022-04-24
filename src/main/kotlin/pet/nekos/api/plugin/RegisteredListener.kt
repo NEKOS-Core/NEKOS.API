@@ -3,6 +3,7 @@ package pet.nekos.api.plugin
 import pet.nekos.api.event.Event
 import pet.nekos.api.event.EventPriority
 import pet.nekos.api.event.Listener
+import pet.nekos.api.entities.Entity
 
 /**
  * Class representing a listener for an event
@@ -20,7 +21,7 @@ open class RegisteredListener constructor(
      * Execute when this event is called. This calls the executor
      * @param event Event that is fired
      */
-    fun callEvent(event: Event) {
-        executor.execute(listener, event)
+    fun callEvent(event: Event, vararg entities: Entity) {
+        executor.execute(listener, event, *entities)
     }
 }
