@@ -2,6 +2,7 @@ package pet.nekos.api.entities.user
 
 import pet.nekos.api.service.Service
 import pet.nekos.api.entities.guild.Guild
+import pet.nekos.api.entities.Entity
 
 /** Class that represents a user
  * @property name Name of this user
@@ -15,4 +16,4 @@ open class User (
     var hash: String,
     var guild: Guild?,
     var service: Service
-) { }
+) : Entity { }

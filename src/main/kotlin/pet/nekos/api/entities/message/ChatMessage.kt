@@ -3,6 +3,7 @@ package pet.nekos.api.entities.message
 import pet.nekos.api.entities.user.User
 import pet.nekos.api.entities.channel.Channel
 import pet.nekos.api.service.ChatService
+import pet.nekos.api.entities.Entity
 
 import java.io.File
 

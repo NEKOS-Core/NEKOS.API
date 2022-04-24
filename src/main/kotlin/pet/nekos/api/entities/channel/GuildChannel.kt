@@ -2,6 +2,7 @@ package pet.nekos.api.entities.channel
 
 import pet.nekos.api.entities.user.User
 import pet.nekos.api.entities.guild.Guild
+import pet.nekos.api.entities.Entity
 import pet.nekos.api.service.Service
 
 

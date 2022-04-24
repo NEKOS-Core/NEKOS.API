@@ -3,6 +3,7 @@ package pet.nekos.api.entities.message
 import pet.nekos.api.entities.user.User
 import pet.nekos.api.entities.channel.Channel
 import pet.nekos.api.service.Service
+import pet.nekos.api.entities.Entity
 
 /**
  * Represents a chat message. Chat messages can be replied to
@@ -16,7 +17,7 @@ open class Message (
     var user: User,
     var channel: Channel?,
     var service: Service
-) {
+) : Entity {
 
     /**
      * Check if this message belongs to the user the bot is running as
