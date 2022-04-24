@@ -1,8 +1,8 @@
 package pet.nekos.api.service
 
 import pet.nekos.api.server.Server
-import pet.nekos.api.channel.Channel
-import pet.nekos.api.message.Message
+import pet.nekos.api.entities.channel.Channel
+import pet.nekos.api.entities.message.Message
 
 import java.io.File
 

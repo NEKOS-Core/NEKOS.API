@@ -1,8 +1,7 @@
-package pet.nekos.api.message
+package pet.nekos.api.entities.message
 
-import pet.nekos.api.user.User
-import pet.nekos.api.channel.Channel
-import pet.nekos.api.service.Service
+import pet.nekos.api.entities.user.User
+import pet.nekos.api.entities.channel.Channel
 import pet.nekos.api.service.ChatService
 
 import java.io.File
@@ -12,14 +11,14 @@ import java.io.File
  * @property content Content of the message
  * @property user User that sent this message
  * @property channel Channel this message was sent in (can be null)
- * @property service Service this entity belongs to
+ * @property service ChatService this entity belongs to
  */
 open class ChatMessage(
     content: String,
     user: User,
     channel: Channel?,
     service: ChatService
-): Message(content, user, channel, service as Service) {
+): Message(content, user, channel, service) {
 
     /**
      * Reply to this message

@@ -3,7 +3,7 @@ package pet.nekos.api.event.message
 import pet.nekos.api.event.Event
 import pet.nekos.api.event.HandlerList
 
-import pet.nekos.api.message.Message
+import pet.nekos.api.entities.message.Message
 import pet.nekos.api.service.Service
 
 import java.util.Date

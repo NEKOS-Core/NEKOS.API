@@ -1,7 +1,7 @@
-package pet.nekos.api.message
+package pet.nekos.api.entities.message
 
-import pet.nekos.api.user.User
-import pet.nekos.api.channel.Channel
+import pet.nekos.api.entities.user.User
+import pet.nekos.api.entities.channel.Channel
 import pet.nekos.api.service.Service
 
 /**

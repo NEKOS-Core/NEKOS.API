@@ -1,7 +1,7 @@
-package pet.nekos.api.user
+package pet.nekos.api.entities.user
 
 import pet.nekos.api.service.Service
-import pet.nekos.api.guild.Guild
+import pet.nekos.api.entities.guild.Guild
 
 /** Class that represents a user
  * @property name Name of this user

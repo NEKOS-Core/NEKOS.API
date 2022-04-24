@@ -1,6 +1,6 @@
-package pet.nekos.api.guild
+package pet.nekos.api.entities.guild
 
-import pet.nekos.api.channel.GuildChannel
+import pet.nekos.api.entities.channel.GuildChannel
 import pet.nekos.api.service.Service
 
 /**

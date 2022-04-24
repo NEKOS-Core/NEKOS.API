@@ -1,7 +1,7 @@
 package pet.nekos.api.service
 
 import pet.nekos.api.server.Server
-import pet.nekos.api.user.User
+import pet.nekos.api.entities.user.User
 
 import java.io.File
 

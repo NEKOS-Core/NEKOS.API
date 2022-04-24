@@ -1,4 +1,4 @@
-package pet.nekos.api.user
+package pet.nekos.api.entities.user
 
 import java.security.MessageDigest
 import java.math.BigInteger
