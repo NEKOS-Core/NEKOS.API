@@ -11,6 +11,7 @@ import pet.nekos.api.event.message.MessageEvent
 import pet.nekos.api.plugin.EventExecutor
 import pet.nekos.api.plugin.Plugin
 import pet.nekos.api.plugin.RegisteredListener
+import pet.nekos.api.entities.Entity
 
 import java.io.File
 import java.io.FileInputStream
@@ -133,7 +134,6 @@ class ServerManager() {
             // Return if no methods were found
             return listeners
         }
-
         // For every found method
         for (method: Method in methods) {
             // Check if the method has an EventHandler annotation
@@ -144,9 +144,8 @@ class ServerManager() {
             // Get the class this method wants as parameter
             val checkClass: Class<*>
             checkClass = method.parameterTypes[0]    
-
             // If the class doesn't want one parameter or the class of this parameter isn't an Event, skip this method
-            if (method.parameterTypes.size != 1 ||  !Event::class.java.isAssignableFrom(checkClass)) {
+            if (method.parameterTypes.size < 1 ||  !Event::class.java.isAssignableFrom(checkClass)) {
                 continue
             }
 
@@ -163,10 +162,31 @@ class ServerManager() {
 
             // Create an EventExecutor class for this listener
             val executor = object : EventExecutor {
-                override fun execute(listener: Listener, event: Event) {
+                override fun execute(listener: Listener, event: Event, vararg entities: Entity) {
                     try {
-                        // Invoke the method obtained earlier
-                        method.invoke(listener, event)
+                        var arguments = arrayListOf<Entity>()
+                        // Loop through all types this method requires
+                        for (c in method.parameterTypes) {
+                            if (c == method.parameterTypes[0]) continue // Skip the first entry, it will be the event, not an entity
+                            for (entity in entities) {
+                                // Check if the superclass of the entity is equal to the type this method requires
+                                if (entity.javaClass.superclass == c) {
+                                    // Add to the list of arguments it will give
+                                    arguments.add(entity)
+                                }
+                            }
+                        }
+                        // Check if the method doesn't require any arguments. 
+                        if (arguments.size == 0 && method.parameterTypes.size == 1) {
+                            // Invoke the method obtained earlier
+                            // Invoke with itself since it is a non static method
+                            // Invoke passing the fired event
+                            method.invoke(listener, event)
+                        // Check if all requirements are met
+                        } else if (arguments.size == method.parameterTypes.size - 1) {
+                            method.invoke(listener, event, *arguments.toTypedArray())
+                        }
+                        // If the arguments dont meet the requirements of the method, dont fire it
                     } catch (ex: Exception) {
                         ex.printStackTrace()
                     }
@@ -223,7 +243,7 @@ class ServerManager() {
      * Fire a given event
      * @param event Event to fire
      */
-    fun fireEvent(event: Event) {
+    fun fireEvent(event: Event, vararg entities: Entity) {
         var handlers = event.getHandlers()
 
         for (rl: RegisteredListener in handlers.getListeners()) {
@@ -232,7 +252,7 @@ class ServerManager() {
                 continue
             }
             try {
-                rl.callEvent(event)
+                rl.callEvent(event, *entities)
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
