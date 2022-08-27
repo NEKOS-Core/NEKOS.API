@@ -1,8 +1,9 @@
-package pet.nekos.api.entities.user
+package pet.nekos.api.entities
+
+import java.security.MessageDigest
+import java.math.BigInteger
 
 import pet.nekos.api.service.Service
-import pet.nekos.api.entities.guild.Guild
-import pet.nekos.api.entities.Entity
 
 import java.io.File
 
@@ -18,7 +19,18 @@ open class User (
     var hash: String,
     var guild: Guild?,
     var service: Service
-) : Entity { 
+) : Entity {
+
+    companion object {
+
+        fun generateHash(input: String): String {
+            val md = MessageDigest.getInstance("MD5")
+            val hash = md.digest(input.toByteArray())
+
+            return BigInteger(1, hash).toString(16).padStart(32, '0')
+        }
+
+    }
 
     /**
      * Check if this is the user the bot is running as

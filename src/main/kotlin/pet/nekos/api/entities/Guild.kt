@@ -1,8 +1,6 @@
-package pet.nekos.api.entities.guild
+package pet.nekos.api.entities
 
-import pet.nekos.api.entities.channel.GuildChannel
 import pet.nekos.api.service.Service
-import pet.nekos.api.entities.Entity
 
 /**
  * Represents a guild in NEKOS
@@ -14,5 +12,10 @@ abstract class Guild (
     var name: String,
     var service: Service
 ) : Entity {
-    abstract fun getChannels(): Array<GuildChannel>
+    open fun getChannels(): Array<Channel> {
+        return arrayOf<Channel>()
+    }
+    open fun getMembers(): Array<User> {
+        return arrayOf<User>()
+    }
 }

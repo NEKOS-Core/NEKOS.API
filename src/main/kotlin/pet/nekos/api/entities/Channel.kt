@@ -1,8 +1,6 @@
-package pet.nekos.api.entities.channel
+package pet.nekos.api.entities
 
-import pet.nekos.api.entities.user.User
 import pet.nekos.api.service.Service
-import pet.nekos.api.entities.Entity
 
 /**
  * The base class for a channel
@@ -11,9 +9,10 @@ import pet.nekos.api.entities.Entity
  */
 open class Channel (
     var name: String,
-    var service: Service
+    var service: Service,
+    var guild: Guild?
 ) : Entity {
-    open fun getUsers(): Array<User> {
+    open fun getMembers(): Array<User> {
         return arrayOf<User>()
     }
 }

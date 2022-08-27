@@ -1,9 +1,8 @@
-package pet.nekos.api.entities.message
+package pet.nekos.api.entities
 
-import pet.nekos.api.entities.user.User
-import pet.nekos.api.entities.channel.Channel
 import pet.nekos.api.service.Service
-import pet.nekos.api.entities.Entity
+
+import java.io.File
 
 /**
  * Represents a chat message. Chat messages can be replied to
@@ -15,7 +14,7 @@ import pet.nekos.api.entities.Entity
 open class Message (
     var content: String,
     var user: User,
-    var channel: Channel?,
+    var channel: Channel,
     var service: Service
 ) : Entity {
 
@@ -30,6 +29,17 @@ open class Message (
         } else if (service.getSelfUser()?.hash == user.hash) {
             return true
         }
+        return false
+    }
+
+    /**
+     * Reply to this message
+     * 
+     * @param content Content of the message to send
+     * @param attachments Optional list of attachments
+     * @return If successful
+     */
+    open fun reply(content: String, vararg attachments: File ): Boolean {
         return false
     }
 

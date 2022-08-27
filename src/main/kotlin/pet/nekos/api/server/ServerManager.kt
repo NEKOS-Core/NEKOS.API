@@ -68,7 +68,7 @@ class ServerManager() {
             var jarStream: JarInputStream = JarInputStream(FileInputStream(file))
             jarStream.use {
                 val manifest: Manifest = jarStream.getManifest()
-                
+
                 className = manifest.getMainAttributes().getValue(Attributes.Name.MAIN_CLASS)
             }
 
@@ -96,7 +96,7 @@ class ServerManager() {
             var jarStream: JarInputStream = JarInputStream(FileInputStream(file))
             jarStream.use {
                 val manifest: Manifest = jarStream.getManifest()
-                
+
                 className = manifest.getMainAttributes().getValue(Attributes.Name.MAIN_CLASS)
             }
 
@@ -194,7 +194,7 @@ class ServerManager() {
             }
             // Add this executor to the list added to the map earlier
             eventSet.add(RegisteredListener(listener, executor, handler.priority, plugin))
-            
+
         }
         // Return the map
         return listeners
@@ -232,7 +232,7 @@ class ServerManager() {
      * @param event Class that extends event to get the handlers from
      * @return HandlerList class of this event
      */
-    fun getEventListeners(event: Class<out Event>): HandlerList {        
+    fun getEventListeners(event: Class<out Event>): HandlerList {
         var m: Method = event.getDeclaredMethod("getHandlerlist")
         m.setAccessible(true)
         var handlers: HandlerList = m.invoke(null) as HandlerList
